@@ -67,5 +67,28 @@ namespace ApiPlayer.Repositories
 
             return query.ToList();
         }
+
+        public IDictionary<string, Player> GetBestPlayersByPositionAndSkill(IDictionary<string, string> positionSkillPairs)
+        { 
+            var result = new Dictionary<string, Player>();
+
+            foreach (var pair in positionSkillPairs)
+            { 
+                var position = pair.Key;
+                var skill = pair.Value;
+
+                var bestPlayer = _players
+                    .Where(p => p.Position == position)
+                    .OrderByDescending(p => p.Skills.FirstOrDefault(s => s.Name == skill)?.Value ?? 0)
+                    .FirstOrDefault();
+
+                if (bestPlayer != null)
+                {
+                    result[position] = bestPlayer;
+                }
+            }
+
+            return result;
+        }
     }
 }

@@ -10,7 +10,11 @@ namespace ApiPlayer.Repositories
         void DeletePlayer(int id);
         Player GetPlayer(int id);
         IEnumerable<Player> GetPlayers();
+
+        // Methods to find best players
         IEnumerable<Player> GetBestPlayers(string position, string skill);
         IEnumerable<Player> GetFilteredPlayers(string position = null, string skillName = null, int? minSkillValue = null);
+
+        IDictionary<string, Player> GetBestPlayersByPositionAndSkill(IDictionary<string, string> positionSkillPairs);
     }
 }
