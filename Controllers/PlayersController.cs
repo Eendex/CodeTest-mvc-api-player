@@ -53,6 +53,27 @@ namespace ApiPlayer.Controllers
             return Ok(player);
         }
 
+        [HttpGet]
+        public IActionResult GetPlayers()
+        { 
+            var players = _playerRepository.GetPlayers();
+            return Ok(players);
+        }
+
+        [HttpGet("best")]
+        public IActionResult GetBestPlayers([FromQuery] string position, [FromQuery] string skill)
+        { 
+            var players = _playerRepository.GetBestPlayers(position, skill);
+            return Ok(players);
+        }
+
+        [HttpGet("filtered")]
+        public IActionResult GetFilteredPlayers([FromQuery] string position, [FromQuery] string skillName, [FromQuery] int? minSkillValue)
+        {
+            var players = _playerRepository.GetFilteredPlayers(position, skillName, minSkillValue);
+            return Ok(players);
+        }
+
        
     }
 }
