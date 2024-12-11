@@ -74,6 +74,14 @@ namespace ApiPlayer.Controllers
             return Ok(players);
         }
 
+        // Changes based on rules given
+        [HttpGet("best-by-position-and-skill")]
+        public IActionResult GetBestPlayersByPositionAndSkill([FromQuery] Dictionary<string, string> positionSkillPairs)
+        { 
+            var players = _playerRepository.GetBestPlayersByPositionAndSkill(positionSkillPairs);
+            return Ok(players);
+        }
+
        
     }
 }
